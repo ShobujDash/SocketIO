@@ -6,7 +6,7 @@
   <title>socket io</title>
 </head>
 <body>
-  <h1 id="myTime"></h1>
+  <h1 id="message"></h1>
 
   <input type="text" id="name">
   <button onclick="send()" id="send">submit</button>
@@ -17,11 +17,10 @@
   <script>
     let socket = io();
 
-    function send(){
-      let name = document.getElementById("name").value;
-      socket.emit("myEvent",name);
-    }
-  
+    socket.on("MyEvent",function(data){
+      document.getElementById("message").innerHTML = data;
+    })
+    
   </script>
 </body>
 </html>
