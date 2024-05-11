@@ -6,12 +6,33 @@ const expressServer = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(expressServer);
 
-io.on("connection", function (socket) {
+// Boradcasting
+// io.on("connection", function (socket) {
+//   console.log("New User connected");
+//   // io.sockets.emit("MyBroadCast", "Hello EveryOne hi !");
+// });
+
+
+
+
+// namespace
+let buyNsp = io.of("/buy");
+
+
+buyNsp.on("connection", function (socket) {
   console.log("New User connected");
-  socket.on("myEvent", function (msg) {
-    console.log(msg);
-  });
+  buyNsp.emit("MyEvent", "Hello buy");
 });
+
+let sellNsp = io.of("/sell");
+sellNsp.on("connection", function (socket) {
+  console.log("New User connected");
+  sellNsp.emit("MyEvent", "Hello sell !");
+});
+
+
+
+
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
