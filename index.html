@@ -8,16 +8,20 @@
 <body>
   <h1 id="myTime"></h1>
 
+  <input type="text" id="name">
+  <button onclick="send()" id="send">submit</button>
+
 
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
     let socket = io();
-    socket.on('myEvent',function(msg){
-      // document.write(msg)
-      document.getElementById('myTime').innerHTML = "";
-      document.getElementById('myTime').innerHTML = msg;
-    })
+
+    function send(){
+      let name = document.getElementById("name").value;
+      socket.emit("myEvent",name);
+    }
+  
   </script>
 </body>
 </html>
