@@ -34,8 +34,8 @@ sellNsp.on("connection", function (socket) {
 
 
 
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+app.get("/", (req, res) => {
+  res.send(__dirname + "/index.html");
 });
 
 expressServer.listen(3000, function () {
